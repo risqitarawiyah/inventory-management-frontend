@@ -1,3 +1,4 @@
+// Code by [Risqi]
 <template>
     <div class="transaction-list">
         <h2>Daftar Transaksi</h2>

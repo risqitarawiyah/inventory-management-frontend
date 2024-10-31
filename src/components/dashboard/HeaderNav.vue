@@ -1,3 +1,4 @@
+// Code by [Risqi]
 <template>
     <header :class="{ expanded: !isSidebarVisible }">
         <button class="toggle-btn" @click="toggleSidebar">☰</button>

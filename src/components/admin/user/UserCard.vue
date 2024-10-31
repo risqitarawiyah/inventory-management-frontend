@@ -1,3 +1,4 @@
+// Code by [Risqi]
 <template>
     <div class="user-card">
         <h3>{{ user.nama }}</h3> <!-- Ubah dari user.name ke user.nama -->

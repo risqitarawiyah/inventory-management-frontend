@@ -1,3 +1,4 @@
+// Code by [Risqi]
 <template>
     <div class="transaction-card">
         <h3>Transaksi #{{ transaction.id }}</h3>

@@ -1,3 +1,4 @@
+// Code by [Risqi]
 <template>
     <div class="item-list">
         <h2>Daftar Barang</h2>
@@ -43,7 +44,7 @@ import { EventBus } from '@/utils/EventBus';
 export default {
     components: {
         AllModal,
-        ItemForm,
+        ItemForm, 
     },
     data() {
         return {
