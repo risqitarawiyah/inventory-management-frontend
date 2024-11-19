@@ -7,13 +7,14 @@
       @toggle-sidebar="toggleSidebar"
       :isSidebarVisible="isSidebarVisible"
     />
-    <div class="app-content">
+    <div class="app-content" :class="{ noHeader: !showHeader}">
       <SidebarNav
+      v-if="showSidebar"
       :currentRole="currentRole"
       :isSidebarVisible="isSidebarVisible"
       @showComponent="navigateTo"
     />
-      <div class="main-content" :class="{ expanded: isSidebarVisible }">
+      <div class="main-content" :class="{ expanded: isSidebarVisible && showSidebar }">
         <router-view :key="$route.fullPath" :currentComponent="$route.params.component"/>
       </div>
     </div>
@@ -37,6 +38,14 @@ export default {
       searchTerm: "",
     };
   },
+  computed: {
+    showHeader() {
+      return !this.$route.meta.hideHeader;
+    },
+    showSidebar() {
+      return !this.$route.meta.hideSidebar;
+    },
+  },
   watch:  {
     "$route.name"(newRole) {
       this.currentRole = newRole;
@@ -45,10 +54,15 @@ export default {
   methods: {
     updateRole(role) {
       this.currentRole = role;
-      this.navigateTo("items");
     },
     navigateTo(component ){
-      this.$router.push({ name: this.currentRole, params: { component } });
+      if (this.currentRole === "ADMIN") {
+        this.$router.push({ name: this.currentRole, params: { component } });
+      } else if (this.currentRole === "USER") {
+        this.$router.push({ name: "user" });
+      } else {
+        this.$router.push({ name: "login" });
+      }
     },
     toggleSidebar() {
       this.isSidebarVisible = !this.isSidebarVisible;
@@ -72,22 +86,46 @@ export default {
 </script>
 
 <style scoped>
+html, body {
+  height: 100%;
+  margin: 0;
+  background-color: #4b3f6b;
+}
 #app {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100%;
+  background-color: #4b3f6b;
 }
 .app-content {
   display: flex;
-  height: 100%;
+  height: calc(100vh - 60px);
+  flex-grow: 1;
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font: 1em sans-serif;
+  margin-top: 60px;
+  background-color: #4b3f6b;
 }
 .main-content {
-  flex: 1;
+  flex-grow: 1;
   padding: 20px;
-  background-color: #ffffff;
   transition: margin-left 0.3s ease;
 }
 .main-content.expanded {
   margin-left: 200px;
+}
+.app-content.noHeader {
+  margin-top: 0;
+  height: 100vh;
+}
+@media (max-width: 768px) {
+  .main-content {
+    margin-left: 0;
+    margin-top: 180px;
+  }
+  .app-content.noHeader {
+    margin-top: 0;
+    height: calc(100vh - 60px);
+  }
 }
 </style>
