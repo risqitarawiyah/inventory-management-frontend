@@ -24,7 +24,8 @@ export default {
     props: {
         currentComponent: {
             type: String,
-            required: true
+            required: true,
+            default: 'items',
         }
     },
     components: {

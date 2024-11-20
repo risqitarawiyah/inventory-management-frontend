@@ -53,7 +53,7 @@ router.beforeEach((to, from, next) => {
 
   if (to.meta.requiresAuth) {
     if (isAuthenticated) {
-      if (userRole === to.meta.role || to.meta.role === Undefined)
+      if (userRole === to.meta.role || to.meta.role === undefined)
       {
         next();
       } else {

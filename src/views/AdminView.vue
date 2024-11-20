@@ -40,6 +40,7 @@
       currentComponent: {
         type: String,
         required: true,
+        default: 'users'
       },
     },
     data() {
