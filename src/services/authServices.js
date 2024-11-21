@@ -27,8 +27,16 @@ export const login = async (username, password) => {
         );
         return response.data.data;
     } catch(error) {
-        console.error("Error during login:", error);
-        throw new Error(error.response?.data?.message || error.message);
+        if (error.response) {
+            switch (error.response.status) {
+                case 400: throw new Error(error.response.data.message || "Username or password is incorrect");
+                case 401: throw new Error(error.response.data.message || "Invalid credentials");
+                default: throw new Error(error.response.data.message || "An error occurred");
+            }
+        } else {
+            console.error("Error during login:", error);
+            throw new Error(error.message || "An unexpected error occurred");
+        }
     }
 };
 
@@ -37,10 +45,18 @@ export const register = async (username, email, password) => {
         const response = await apiClient.post("/auth/register", {
             username,
             email,
-            password
+            password,
         });
         return response.data;
     } catch (error) {
-        throw new Error (error.response?.data?.message || error.message);
+        if (error.response) {
+            switch (error.response.status) {
+                case 400: throw new Error(error.response.data.message || "User already exists");
+                default: throw new Error(error.response.data.message || "An error occurred");
+            }
+        }else {
+            console.error("Error during registration:", error);
+            throw new Error(error.message || "An unexpected error occurred");
+        }
     }
 };

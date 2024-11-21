@@ -11,7 +11,7 @@
                 :key="user.id" 
                 :user="user" 
                 @edit-user="editUser" 
-                @delete-user="confirmDeleteUser" 
+                @delete-user="handleDeleteUser" 
             />
         </div>
         <AllModal :visible="showForm" @close="cancelEditForm">

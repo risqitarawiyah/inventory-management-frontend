@@ -7,10 +7,10 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import router from './router'
 import { createPinia } from 'pinia'
 import { createPiniaMiddleware } from "./plugins/piniaMiddleware";
-import piniaPersistedstate from 'pinia-plugin-persistedstate';
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate';
 
 const pinia = createPinia();
 pinia.use(createPiniaMiddleware());
-pinia.use(piniaPersistedstate);
+pinia.use(piniaPluginPersistedstate);
 
 createApp(App).use(pinia).use(router).mount('#app');
