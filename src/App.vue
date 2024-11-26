@@ -33,7 +33,7 @@ export default {
   },
   data() {
     return {
-      currentRole: localStorage.getItem("role") || "guest",
+      currentRole: this.$route.name || "admin",
       isSidebarVisible: true,
       searchTerm: "",
     };
