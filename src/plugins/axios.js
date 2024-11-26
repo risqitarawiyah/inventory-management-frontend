@@ -4,7 +4,7 @@ import {useAuthStore} from '@/store/authStore'
 const apiClient = axios.create({
     baseURL: 'http://localhost:3000/api',
     headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
     },
 });
 
@@ -17,9 +17,9 @@ apiClient.interceptors.request.use((config) => {
     }
 
     return config;
-}, (error) => {
-    return Promise.reject(error);    
-}
+}, 
+    (error) => {
+        return Promise.reject(error);    
+    }
 );
-
 export default apiClient;

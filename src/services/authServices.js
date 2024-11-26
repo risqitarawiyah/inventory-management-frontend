@@ -3,7 +3,7 @@ import { useAuthStore } from "@/store/authStore";
 
 export const login = async (username, password) => {
     try {
-        const response = await apiClient.post("/auth/login", {
+        const response = await apiClient.post("./auth/login", {
             username,
             password,
         });
@@ -42,11 +42,11 @@ export const login = async (username, password) => {
 
 export const register = async (username, email, password) => {
     try {
-        const response = await apiClient.post("/auth/register", {
+        const response = await apiClient.post("./auth/register", {
             username,
             email,
-            password,
-        });
+            password
+        })
         return response.data;
     } catch (error) {
         if (error.response) {
